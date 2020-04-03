@@ -24,6 +24,10 @@ void printfun2() {
 	cout << "看看到6666底能否同步。。。" << endl;
 }
 
+void printfun3() {
+	cout << "看看到6666底能54647否同步。。。" << endl;
+}
+
 void printfun() {
 	cout << "看看到底能否同步。。。" << endl;
 }
