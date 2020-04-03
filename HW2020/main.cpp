@@ -20,10 +20,18 @@ unordered_map<int, vector<int>> edge_mapping;
 unordered_map<int, int> vertex_visit;
 vector<deque<int>> all_path, result; //all_path: 未排序的环路集合 result: 排序后的环路集合
 
-									 /*=======================================================================
-									 load_data: 从txt文本中读取数据，并将存在的边和节点在分别graph_matrix,
-									 vertex中置1
-									 =======================================================================*/
+void printfun2() {
+	cout << "看看到6666底能否同步。。。" << endl;
+}
+
+void printfun() {
+	cout << "看看到底能否同步。。。" << endl;
+}
+
+/*=======================================================================
+load_data: 从txt文本中读取数据，并将存在的边和节点在分别graph_matrix,
+vertex中置1
+=======================================================================*/
 void load_data(string path)
 {
 	ifstream infile(path.c_str());
