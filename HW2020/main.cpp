@@ -176,8 +176,7 @@ find_circle: 寻找graph_matrix, vertex中所有环路
 =======================================================================*/
 void find_circle()
 {
-	unordered_map<int, int>::iterator vertex_iter;
-	for (vertex_iter = vertex_visit.begin(); vertex_iter != vertex_visit.end(); vertex_iter++)
+	for (auto vertex_iter = vertex_visit.begin(); vertex_iter != vertex_visit.end(); vertex_iter++)
 	{
 		if (vertex_iter->second == 0)
 		{
@@ -197,10 +196,10 @@ void circle_unique_and_sort()
 
 	for (int i = min_cir; i <= max_cir; i++)
 	{
-		for (int j = 0; j < all_path.size(); j++)
+		for (auto&& sigle_loop : all_path )
 		{
-			if (all_path[j].size() == i)
-				result.push_back(all_path[j]);
+			if (sigle_loop.size() == i)
+				result.push_back(sigle_loop);
 		}
 	}
 }
@@ -258,8 +257,8 @@ int main()
 	save_data("result_2.txt");
 	finish = clock();
 
-	cout << ((double)t1 - (double)start) / CLOCKS_PER_SEC << endl;
-	cout << ((double)finish - (double)t1) / CLOCKS_PER_SEC << endl;
+	cout << ((double)t1 - (double)start) << endl;
+	cout << ((double)finish - (double)t1) << endl;
 
 	system("pause");
 	return 0;
