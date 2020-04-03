@@ -10,6 +10,11 @@
 
 using namespace std;
 
+void printfunction1() {
+	cout << "test the push" << endl;
+
+}
+
 //#define max_size 30005 //邻接矩阵大小
 #define min_cir 3 //环路节点最小个数
 #define max_cir 7 //环路节点最大个数
