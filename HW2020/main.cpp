@@ -10,11 +10,6 @@
 
 using namespace std;
 
-void printfunction1() {
-	cout << "test the push" << endl;
-
-}
-
 //#define max_size 30005 //邻接矩阵大小
 #define min_cir 3 //环路节点最小个数
 #define max_cir 7 //环路节点最大个数
@@ -24,18 +19,6 @@ void printfunction1() {
 unordered_map<int, vector<int>> edge_mapping;
 unordered_map<int, int> vertex_visit;
 vector<deque<int>> all_path, result; //all_path: 未排序的环路集合 result: 排序后的环路集合
-
-void printfun2() {
-	cout << "看看到6666底能否同步。。。" << endl;
-}
-
-void printfun3() {
-	cout << "看看到6666底能54647否同步。。。" << endl;
-}
-
-void printfun() {
-	cout << "看看到底能否同步。。。" << endl;
-}
 
 /*=======================================================================
 load_data: 从txt文本中读取数据，并将存在的边和节点在分别graph_matrix,
@@ -99,6 +82,37 @@ deque<int> circle_sort(deque<int> &unsort_path)
 	return sort_path;
 }
 
+void circle_sort_V2(deque<int>& unsort_path)
+{
+	int min_val = 0; //最小节点的序号
+	for (int i = 0; i < unsort_path.size(); i++)
+	{
+
+		if (unsort_path[i] < unsort_path[min_val])
+			min_val = i;
+	}
+	//位置靠前
+	if (min_val < unsort_path.size() / 2) {
+		auto k = 0;
+		while (k++ != min_val) {
+			unsort_path.push_back(unsort_path.front());
+			unsort_path.pop_front();
+		}
+	}
+	//位置靠后
+	else {
+		auto k = unsort_path.size() - 1;
+		while (k-- != min_val) {
+			unsort_path.push_front(unsort_path.back());
+			unsort_path.pop_back();
+
+		}
+		unsort_path.push_front(unsort_path.back());
+		unsort_path.pop_back(); //把最小的元素补上。
+	}
+}
+
+
 /*=======================================================================
 save_path: 从路径节点栈cur_path中取出环路，v为栈顶元素，i为环路起点位置，
 即环路 i->...->...->v->i
@@ -106,7 +120,8 @@ save_path: 从路径节点栈cur_path中取出环路，v为栈顶元素，i为环路起点位置，
 void save_path(stack<int> cur_path, int v, int i)
 {
 	stack<int> copy;
-	deque<int> unsort_path, sort_path;
+	//deque<int> unsort_path, sort_path;
+	deque<int> unsort_path;
 	copy = cur_path;
 	while (copy.top() != i)
 	{
@@ -115,8 +130,10 @@ void save_path(stack<int> cur_path, int v, int i)
 	}
 	unsort_path.push_front(copy.top());
 	if (unsort_path.size() < 3 || unsort_path.size() > 7) return;
-	sort_path = circle_sort(unsort_path); //对环路节点排序
-	all_path.push_back(sort_path); //排序后存入all_path
+	//sort_path = circle_sort(unsort_path); //对环路节点排序
+	circle_sort_V2(unsort_path); //对环路节点排序, 采用新的排序方式，就地算法
+	//all_path.push_back(sort_path); //排序后存入all_path
+	all_path.push_back(unsort_path); //排序后存入all_path
 }
 
 /*=======================================================================
@@ -232,11 +249,11 @@ int main()
 	find_circle();
 	circle_unique_and_sort();
 	//display();
-	save_data("result_1.txt");
+	save_data("result_2.txt");
 	finish = clock();
 
-	cout << (double)(t1 - start) / CLOCKS_PER_SEC << endl;
-	cout << (double)(finish - t1) / CLOCKS_PER_SEC << endl;
+	cout << ((double)t1 - (double)start) / CLOCKS_PER_SEC << endl;
+	cout << ((double)finish - (double)t1) / CLOCKS_PER_SEC << endl;
 
 	system("pause");
 	return 0;
