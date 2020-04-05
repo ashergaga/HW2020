@@ -16,8 +16,8 @@ using namespace std;
 
 //bool graph_matrix[max_size][max_size]; //graph_matrix: 邻接矩阵
 //int vertex[max_size], v_visit[max_size]; //vertex: 节点数组, v_visit: 节点访问状态数组
-unordered_map<int, vector<int>> edge_mapping;
-unordered_map<int, int> vertex_visit;
+unordered_map<int, vector<int>> edge_mapping; //  key 代表 本端id, value是对端id
+unordered_map<int, int> vertex_visit; //key 代表账户id, value是取值0，1，2
 vector<deque<int>> all_path, result; //all_path: 未排序的环路集合 result: 排序后的环路集合
 
 /*=======================================================================
@@ -34,8 +34,8 @@ void load_data(string path)
 		exit(0);
 	}
 
-	unordered_map<int, vector<int>>::iterator edge_iter;
-	unordered_map<int, int>::iterator vertex_iter;
+	/*unordered_map<int, vector<int>>::iterator edge_iter;
+	unordered_map<int, int>::iterator vertex_iter;*/
 	while (infile)
 	{
 		getline(infile, line);
@@ -43,7 +43,12 @@ void load_data(string path)
 		char ch;
 		int v, u, w;
 		sin >> v >> ch >> u >> ch >> w;
-		edge_iter = edge_mapping.find(v);
+
+		//这种写法简单，效率略快
+		edge_mapping[v].push_back(u);
+		vertex_visit[v] = 0;
+
+		/*auto edge_iter = edge_mapping.find(v);
 		if (edge_mapping.empty() || edge_iter == edge_mapping.end())
 		{
 			vector<int> edge_set;
@@ -51,13 +56,13 @@ void load_data(string path)
 			edge_mapping.insert(pair<int, vector<int>>(v, edge_set));
 		}
 		else if (edge_iter != edge_mapping.end())
-			edge_mapping[v].push_back(u);
+			edge_mapping[v].push_back(u);*/
 
-		vertex_iter = vertex_visit.find(v);
+		/*auto vertex_iter = vertex_visit.find(v);
 		if (vertex_visit.empty() || vertex_iter == vertex_visit.end())
 		{
 			vertex_visit.insert(pair<int, int>(v, 0));
-		}
+		}*/
 	}
 	infile.close();
 }
@@ -85,8 +90,6 @@ deque<int> circle_sort(deque<int> &unsort_path)
 /*
 就地算法，找到最小值的位置，如果位置靠后，就从后往前移动
 反之，就从前往后移动
-6666666
-7777777
 */
 void circle_sort_V2(deque<int>& unsort_path)
 {
@@ -210,6 +213,7 @@ display: 显示结果
 void display()
 {
 	cout << "有向图中环路的总数为：" << result.size() << endl;
+	cout << "环为：" << endl;
 	for (int i = 0; i < result.size(); i++)
 	{
 		for (int j = 0; j < result[i].size(); j++)
@@ -247,6 +251,7 @@ int main()
 {
 	clock_t start, finish, t1, t2;
 	start = clock();
+	//string path = "naive.txt";
 	string path = "test_data.txt";
 
 	load_data(path);
@@ -254,11 +259,12 @@ int main()
 	find_circle();
 	circle_unique_and_sort();
 	//display();
-	save_data("result_2.txt");
+	//save_data("result_naive.txt");
+	save_data("result_1.txt");
 	finish = clock();
 
-	cout << ((double)t1 - (double)start) << endl;
-	cout << ((double)finish - (double)t1) << endl;
+	cout << "前段用时: " << ((double)t1 - (double)start) << endl;
+	cout << "后段用时: " << ((double)finish - (double)t1) << endl;
 
 	system("pause");
 	return 0;
