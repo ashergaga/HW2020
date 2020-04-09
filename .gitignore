@@ -259,3 +259,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/HW2020/datasets/huawei-preliminary-data-master/result2.txt
+/HW2020/datasets/huawei-preliminary-data-master/result3.txt
+/HW2020/datasets/huawei-preliminary-data-master/README.md
+/HW2020/datasets/huawei-preliminary-data-master/result.txt
+/HW2020/result_very_big.txt
+/HW2020/test_data_very_big.txt
