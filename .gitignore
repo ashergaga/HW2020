@@ -265,3 +265,8 @@ __pycache__/
 /HW2020/datasets/huawei-preliminary-data-master/result.txt
 /HW2020/result_very_big.txt
 /HW2020/test_data_very_big.txt
+*.vcxproj
+*.vcxproj
+*.vcxproj
+*.filters
+*.txt

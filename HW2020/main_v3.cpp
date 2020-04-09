@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -171,7 +173,7 @@ public:
 			++ansCnt;
 		}
 		//深入遍历的条件
-		if (depth < DEPTH_HIGH_LIMIT - 1) {
+		if (depth < DEPTH_HIGH_LIMIT -1) {
 			for (; it != gCur.end(); ++it) {
 				if (!vis[*it]) {
 					dfs(head, *it, depth + 1, path); //深度加1
@@ -205,6 +207,7 @@ public:
 		reachable = vector<int>(nodeCnt, -1);
 		vector<int> currentJs(nodeCnt); //这是调用了vector的构造函数，还是老生常谈的，先开辟nodeCnt大小的内存
 		for (int i = 0; i < nodeCnt; ++i) {
+			//cout << i << endl;
 #ifdef TEST
 			if (i % 100 == 0) {
 				cout << i << "/" << nodeCnt << " ~ " << ansCnt << endl; //测试部分可暂时忽略
@@ -323,8 +326,8 @@ public:
 
 int main()
 {
-	string testFile = "test_data_very_big.txt";
-	string outputFile = "result_very_big.txt";
+	string testFile = "test_data_big.txt";
+	string outputFile = "result.txt";
 
 	auto t = clock();
 	Solution solution;
@@ -336,6 +339,6 @@ int main()
 	solution.save_fwrite(outputFile);
 
 	cout << "用时: "<< clock() - t << " ms"<< endl;
-
+	system("pause");
 	return 0;
 }
