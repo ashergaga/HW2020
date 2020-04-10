@@ -213,21 +213,21 @@ void save_data(string path) {
 
 int main()
 {
-	//clock_t start, finish, t1;
-	//start = clock();
+	clock_t start, finish, t1;
+	start = clock();
 	//string path = "F:\\学习资料\\软挑\\初赛\\test_data_new_v2.txt";
-	string path = "F:\\学习资料\\软挑\\初赛\\test_data.txt";
+	string path = "/data/test_data.txt";
 	load_data(path);
-	//t1 = clock();
+	t1 = clock();
 	find_circle();
 	circle_unique_and_sort();
 	display();
-	save_data("result_1.txt");
-	//finish = clock();
+	save_data("/projects/student/result.txt");
+	finish = clock();
 
-	//cout << (double)(t1 - start) / CLOCKS_PER_SEC << endl;
-	//cout << (double)(finish - t1) / CLOCKS_PER_SEC << endl;
+	cout << (double)(t1 - start) / CLOCKS_PER_SEC << endl;
+	cout << (double)(finish - t1) / CLOCKS_PER_SEC << endl;
 
-	system("pause");
+	//system("pause");
 	return 0;
 }

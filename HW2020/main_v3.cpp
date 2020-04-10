@@ -326,8 +326,8 @@ public:
 
 int main()
 {
-	string testFile = "test_data_big.txt";
-	string outputFile = "result.txt";
+	string testFile = "/data/test_data.txt";
+	string outputFile = "/projects/student/result.txt";
 
 	auto t = clock();
 	Solution solution;

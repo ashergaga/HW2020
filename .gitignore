@@ -270,3 +270,6 @@ __pycache__/
 *.vcxproj
 *.filters
 *.txt
+*.vcxproj
+*.vcxproj
+*.filters
